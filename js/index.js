@@ -51,10 +51,10 @@ const displyNewsOfCategory = (allNews) => {
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = '';
     allNews.forEach((news) => {
-        console.log(news);
+        // console.log(news);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('card', 'mb-3', 'shadow-lg');
-        const { thumbnail_url, title, details, author, total_view } = news;
+        const { thumbnail_url, title, details, author, total_view, _id } = news;
 
         // const newsDetails = details.length > 400 ? details.slice(0, 400) : details;
         let newsDetails;
@@ -96,7 +96,9 @@ const displyNewsOfCategory = (allNews) => {
                                 </div>
 
 
-                                <button class = "btn btn-success btn-sm">Details </button>
+                                <button onclick = "newsDetail('${_id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsDetailModal">
+                                    Detail
+                                </button>
                             </div>
 
                         </div>
@@ -105,4 +107,21 @@ const displyNewsOfCategory = (allNews) => {
         `
         newsContainer.appendChild(newsDiv);
     })
+}
+
+const newsDetail = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/news/${id}`
+    const res = await fetch(url);
+    const data = await res.json();
+    const news = data.data[0];
+
+    document.getElementById('news-detail-image').src = news.image_url;
+    document.getElementById('news-detail-title').innerText = news.title;
+    document.getElementById('news-detail-desc').innerText = news.details;
+
+
+
+
+
+
 }
