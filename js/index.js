@@ -51,10 +51,10 @@ const displyNewsOfCategory = (allNews) => {
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = '';
     allNews.forEach((news) => {
-        // console.log(news);
+        console.log(news);
         const newsDiv = document.createElement('div');
-        newsDiv.classList.add('card', 'mb-3');
-        const { thumbnail_url, title, details } = news;
+        newsDiv.classList.add('card', 'mb-3', 'shadow-lg');
+        const { thumbnail_url, title, details, author, total_view } = news;
 
         // const newsDetails = details.length > 400 ? details.slice(0, 400) : details;
         let newsDetails;
@@ -64,19 +64,41 @@ const displyNewsOfCategory = (allNews) => {
             newsDetails = details
         }
 
-
         newsDiv.innerHTML = `
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src="${thumbnail_url}" class="img-fluid rounded-start" alt="...">
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8 pe-3">
                             <div class="card-body">
                                 <h5 class="card-title"> ${title} </h5>
                                 <p class="card-text">
                                      ${newsDetails}.  
                                 </p>
                             </div>
+
+                            <div class= "d-flex justify-content-between align-items-center mt-5">
+                                
+                                <div class="d-flex flex-direction-row"> 
+                                    <img  src="${author.img}" class="img-fluid  author-image" alt="...">
+                                    <div class="ms-3"> 
+                                            <span> <b> ${author.name} </b> </span> <br>
+                                            <span>  ${author.published_date} </span>
+                                    </div>
+                                </div>
+                                <div> <i class="far fa-eye"></i> <b> ${total_view}M </b> </div>
+                                <div>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+
+
+                                <button class = "btn btn-success btn-sm">Details </button>
+                            </div>
+
                         </div>
                     </div>
         

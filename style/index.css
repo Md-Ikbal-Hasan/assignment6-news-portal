@@ -16,3 +16,13 @@ p {
 #news-category-container p {
     cursor: pointer;
 }
+
+.card {
+    background: #ffffff;
+}
+
+.author-image {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
