@@ -28,8 +28,10 @@ document.getElementById('news-category-container').addEventListener('click', fun
     const selected_category = e.target;
 
     if (selected_category.tagName == 'P') {
+        selected_category.classList.remove('text-danger')
         const category_id = selected_category.getAttribute('id');
         const categoryName = selected_category.innerText;
+        // selected_category.classList.add('text-danger')
         //data fetch start here....
         loadCategoryNews(category_id, categoryName);
         // loader start here......
