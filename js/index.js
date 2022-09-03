@@ -30,7 +30,10 @@ document.getElementById('news-category-container').addEventListener('click', fun
     if (selected_category.tagName == 'P') {
         const category_id = selected_category.getAttribute('id');
         const categoryName = selected_category.innerText;
+        //data fetch start here....
         loadCategoryNews(category_id, categoryName);
+        // loader start here......
+        toggleLoader(true);
     }
 })
 
@@ -40,6 +43,7 @@ const loadCategoryNews = async (category_id, categoryName) => {
     const res = await fetch(url)
     const data = await res.json();
     const numberOfNews = data.data.length;
+    // set the number of news and category
     document.getElementById('number-of-news').innerText = numberOfNews;
     document.getElementById('category-name').innerText = categoryName;
 
@@ -107,6 +111,9 @@ const displyNewsOfCategory = (allNews) => {
         `
         newsContainer.appendChild(newsDiv);
     })
+
+    // loader end here ....... 
+    toggleLoader(false)
 }
 
 const newsDetail = async (id) => {
@@ -119,9 +126,16 @@ const newsDetail = async (id) => {
     document.getElementById('news-detail-title').innerText = news.title;
     document.getElementById('news-detail-desc').innerText = news.details;
 
+}
 
 
+const toggleLoader = isLoading => {
+    const loaderSection = document.getElementById('loader');
+    if (isLoading) {
+        loaderSection.classList.remove('d-none')
+    } else {
+        loaderSection.classList.add('d-none')
 
-
+    }
 
 }
