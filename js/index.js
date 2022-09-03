@@ -1,11 +1,25 @@
+const showErrorMessage = (err) => {
+    const errorSection = document.getElementById('error-section');
+    errorSection.classList.remove('d-none')
+    document.getElementById('error-message').innerText = err
+}
+
+
+
 // load news category name .................
 const loadCategories = async () => {
     const url = `https://openapi.programming-hero.com/api/news/categories`
-    const res = await fetch(url)
-    const data = await res.json();
-    displayNewsCategory(data.data.news_category);
+    try {
+        const res = await fetch(url)
+        const data = await res.json();
+        displayNewsCategory(data.data.news_category);
+
+    } catch (err) {
+        showErrorMessage(err)
+    }
 
 }
+
 loadCategories();
 
 // display news category name in the UI dynamically....................
@@ -41,15 +55,22 @@ document.getElementById('news-category-container').addEventListener('click', fun
 
 // load the news of specific category ................
 const loadCategoryNews = async (category_id, categoryName) => {
-    const url = 'https://openapi.programming-hero.com/api/news/category/' + category_id
-    const res = await fetch(url)
-    const data = await res.json();
-    const numberOfNews = data.data.length;
-    // set the number of news and category
-    document.getElementById('number-of-news').innerText = numberOfNews;
-    document.getElementById('category-name').innerText = categoryName;
+    const url = 'https://openapi.programming-hero.com/api/news/category/' + category_id;
 
-    displyNewsOfCategory(data.data);
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        const numberOfNews = data.data.length;
+        // set the number of news and category
+        document.getElementById('number-of-news').innerText = numberOfNews;
+        document.getElementById('category-name').innerText = categoryName;
+
+        displyNewsOfCategory(data.data);
+    } catch (err) {
+        showErrorMessage(err)
+        // alert(err)
+        toggleLoader(false)
+    }
 
 }
 
@@ -73,7 +94,7 @@ const displyNewsOfCategory = (allNews) => {
         newsDiv.innerHTML = `
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="${thumbnail_url}" class="img-fluid rounded-start" alt="...">
+                            <img src="${thumbnail_url}" class="img-fluid h-100  rounded-start" alt="...">
                         </div>
                         <div class="col-md-8 pe-3">
                             <div class="card-body">
