@@ -10,12 +10,7 @@
 </head>
 
 <body>
-    <section>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </section>
+    <h1>test</h1>
 
 
 
@@ -27,24 +22,42 @@
         crossorigin="anonymous"></script>
 
     <script>
-        // load the news of specific category ................
-        const loadCategoryNews = async (category_id, categoryName) => {
-            const url = 'https://openapi.programming-hero./api/news/category/' + '30';
-
-            try {
-                const res = await fetch(url);
-                const data = await res.json();
-
-
-                console.log(data);
-            } catch (err) {
-                // showErrorMessage(err)
-                alert(err)
+        const users = [
+            {
+                name: 'ikbal',
+                subject: 'Math',
+                mark: 86
+            },
+            {
+                name: 'sunny',
+                subject: 'Math',
+                mark: 82
+            },
+            {
+                name: 'alhaj',
+                subject: 'Math',
+                mark: 
+            },
+            {
+                name: 'mubin',
+                subject: 'Math',
+                mark: 88
             }
+        ]
 
-        }
+        console.log("befor sort: ");
+        users.forEach((user) => {
+            console.log(user.name, user.mark);
+        })
 
-        loadCategoryNews();
+        users.sort(function (a, b) {
+            return b.mark - a.mark
+        })
+
+        console.log("after sort: ");
+        users.forEach((user) => {
+            console.log(user.name, user.mark);
+        })
     </script>
 </body>
 

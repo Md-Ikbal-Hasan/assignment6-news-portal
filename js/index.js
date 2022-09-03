@@ -65,7 +65,18 @@ const loadCategoryNews = async (category_id, categoryName) => {
         document.getElementById('number-of-news').innerText = numberOfNews;
         document.getElementById('category-name').innerText = categoryName;
 
-        displyNewsOfCategory(data.data);
+
+
+
+
+        let allData = data.data
+        //  sorting the object array acording to total_view
+        allData.sort(function (a, b) {
+            return b.total_view - a.total_view // descending order
+        })
+
+        displyNewsOfCategory(allData);
+
     } catch (err) {
         showErrorMessage(err)
         // alert(err)
@@ -94,7 +105,7 @@ const displyNewsOfCategory = (allNews) => {
         newsDiv.innerHTML = `
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="${thumbnail_url}" class="img-fluid h-100  rounded-start" alt="...">
+                            <img src="${thumbnail_url}" class="img-fluid  rounded-start" alt="...">
                         </div>
                         <div class="col-md-8 pe-3">
                             <div class="card-body">
@@ -104,10 +115,10 @@ const displyNewsOfCategory = (allNews) => {
                                 </p>
                             </div>
 
-                            <div class= "d-flex justify-content-between align-items-center mt-5">
+                            <div class= "d-flex mb-2 flex-column flex-md-row justify-content-between align-items-center  mt-5">
                                 
                                 <div class="d-flex flex-direction-row"> 
-                                    <img  src="${author.img}" class="img-fluid  author-image" alt="...">
+                                    <img  src="${author.img}" class="img-fluid author-image " alt="...">
                                     <div class="ms-3"> 
                                             <span> <b> ${author.name} </b> </span> <br>
                                             <span>  ${author.published_date} </span>
