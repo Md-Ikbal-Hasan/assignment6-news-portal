@@ -10,7 +10,7 @@ const showErrorMessage = (err) => {
 const loadCategories = async () => {
     const url = `https://openapi.programming-hero.com/api/news/categories`
     try {
-        const res = await fetch(url)
+        const res = await fetch(url);
         const data = await res.json();
         displayNewsCategory(data.data.news_category);
 
@@ -42,7 +42,7 @@ document.getElementById('news-category-container').addEventListener('click', fun
     const selected_category = e.target;
 
     if (selected_category.tagName == 'P') {
-        selected_category.classList.remove('text-danger')
+        // selected_category.classList.add('text-danger') // highlight the category name which i clicked
         const category_id = selected_category.getAttribute('id');
         const categoryName = selected_category.innerText;
         // selected_category.classList.add('text-danger')
@@ -64,9 +64,6 @@ const loadCategoryNews = async (category_id, categoryName) => {
         // set the number of news and category
         document.getElementById('number-of-news').innerText = numberOfNews;
         document.getElementById('category-name').innerText = categoryName;
-
-
-
 
 
         let allData = data.data
@@ -104,8 +101,10 @@ const displyNewsOfCategory = (allNews) => {
 
         newsDiv.innerHTML = `
                     <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="${thumbnail_url}" class="img-fluid  rounded-start" alt="...">
+                       
+                        <div class="col-md-4 ">
+                            <img src="${thumbnail_url}" class="img-fluid   rounded-start " alt="...">
+                           
                         </div>
                         <div class="col-md-8 pe-3">
                             <div class="card-body">
@@ -115,7 +114,7 @@ const displyNewsOfCategory = (allNews) => {
                                 </p>
                             </div>
 
-                            <div class= "d-flex mb-2 flex-column flex-md-row justify-content-between align-items-center  mt-5">
+                            <div class= "d-flex mb-2 flex-column flex-md-row justify-content-between align-items-start align-items-md-center   mt-5">
                                 
                                 <div class="d-flex flex-direction-row"> 
                                     <img  src="${author.img}" class="img-fluid author-image " alt="...">
